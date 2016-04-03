@@ -69,6 +69,7 @@ function gotDescription(description) {
     }, function() {console.log('set description error')});
 }
 
+//updated
 function gotRemoteStream(event) {
     console.log('Remote stream added.');
     //remoteVideo.src = window.URL.createObjectURL(event.stream);
