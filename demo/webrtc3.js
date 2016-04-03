@@ -75,7 +75,7 @@ function gotRemoteStream(event) {
     //remoteVideo.src = window.URL.createObjectURL(event.stream);
     console.log('Dynamically creating video');
     var remoteVideo = document.createElement("video");
-    remoteVideo.autoPlay = true;
+    remoteVideo.autoplay = true;
     remoteVideo.src = window.URL.createObjectURL(event.stream);
     remoteStream = event.stream;
     $('#videos').append(remoteVideo);
