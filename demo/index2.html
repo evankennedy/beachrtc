@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="webrtc2.js"></script>
-    </head>
+<head>
+	<meta charset="utf-8">
+	<title>Peer connection</title>
+	<style type="text/css">
+		video {
+			max-width: 300px;
+			max-height: 300px;
+		}
+	</style>
+</head>
+<body>
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
 
-    <body>
-        <video id="localVideo" autoplay muted style="width:40%;"></video>
-        <video id="remoteVideo" autoplay style="width:40%;"></video>
+    <div>
+      <button id="startButton">Start</button>
+      <button id="stopButton">Stop</button>
+      <button id="callButton">Call</button>
+      <button id="hangupButton">Hang Up</button>
+    </div>
 
-        <br />
-
-        <input type="button" id="start" onclick="start(true)" value="Start Video"></input>
-
-        <script type="text/javascript">
-            pageReady();
-        </script>
-    </body>
+  <script src="adapter.js"></script>
+  <script src="common.js"></script>
+  <script src="rtc.js"></script>
+</body>
 </html>

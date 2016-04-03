@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PeerJS - Video chat example</title>
+  <script type="text/javascript" src="peer.min.js"></script>
+  <script>
+    // Compatibility shim
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    // PeerJS object
+    var peer = new Peer({
+    	key: 'lwjd5qra8257b9',
+    	debug: 3
+    });
+
+    peer.on('open', function() {
+    	console.log('peer id', peer.id);
+    	
+		var sock = new WebSocket('ws://52.38.106.219:3434');
+		
+		sock.onmessage = function(message) {
+			var id = message.data;
+			console.log('id connected', id);
+			if(id != peer.id) call(id);
+		};
+		
+		sock.onopen = function(event) {
+			sock.send(peer.id);
+		};
+    });
+
+    // Receiving a call
+    peer.on('call', function(call){
+		call.answer(window.localStream);
+		play(call);
+    });
+    
+    peer.on('error', console.error.bind(console));
+    
+    function call(id) {
+    	play(peer.call(id, window.localStream));
+    }
+
+    navigator.getUserMedia({ audio: true, video: false }, function(stream) {
+        window.localStream = stream;
+    }, console.error.bind(console));
+
+    function play(call) {
+		call.on('stream', function(stream){
+			var audio = new Audio(URL.createObjectURL(stream));
+			audio.play();
+		});
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
