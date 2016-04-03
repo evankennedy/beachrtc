@@ -1,4 +1,4 @@
-# beachrtc
+# BeachRTC
 
 ## Testing Locally
 
